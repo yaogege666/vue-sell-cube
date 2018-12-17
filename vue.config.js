@@ -1,7 +1,16 @@
+const path = require('path')
 const appData = require('./data.json')
 const seller = appData.seller
 const goods = appData.goods
 const ratings = appData.ratings
+
+     /*
+     * 1.别名的配置
+     * 2.别名来代替src目录下面的components/common
+     */
+function resolve (dir) {
+  return path.join(__dirname, dir)
+}
 
 module.exports = {
   css: {
@@ -43,6 +52,11 @@ module.exports = {
 
     }
 
+  },
+  chainWebpack (config) {
+    config.resolve.alias
+      .set('components', resolve('src/components'))
+      .set('common', resolve('src/common'))
   }
 
 }
